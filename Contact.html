@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="Contact.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- main body -->
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header id="navbar">
+        <!-- <a href="Home.html" class="logo"><i class="ri-home-4-line"><span>NAARC</span></i></a> -->
+        <a href="Home.html" class="logo"><img src="img\logo.png" width="52" alt="NAARC LOGO"></a>
+
+        <ul class="navbar">
+            <li><a href="Home.html" class="active">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Antiques.html">Antiques</a></li>
+            <li><a href="Metal.html">Metal</a></li>
+            <li><a href="Stone.html">Stone</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Gallery.html">Gallery</a></li>
+        </ul>
+
+        <div class="main">
+            <a href="#" class="facebook"><i class="ri-facebook-circle-fill"></i></a>
+            <a href="#" class="twitter"><i class="ri-twitter-fill"></i></a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+
+
+    <!-- main body -->
+    <div class="container">
+        <div class="content">
+            <div class="left-side">
+                <div class="address details">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="topic">Address</div>
+                    <div class="text-one">United States,</div>
+                    <div class="text-two">India, Malaysia</div>
+                </div>
+                <div class="phone details">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="topic">Phone</div>
+                    <div class="text-one">Toll Free - 180030700033</div>
+                    <div class="text-two">Mobile no:- (+91)9458800610</div>
+                </div>
+                <div class="Web details">
+                    <i class="fas fa-envelope"></i>
+                    <div class="topic">Email</div>
+                    <div class="text-one">info@naarc.us</div>
+                    <div class="text-two"></div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="topic-text">Send us a Message</div>
+                <p>WE VALUE YOUR MESSAGE.</p>
+
+                <form name="submit-to-google-sheet">
+                    <div class="input-box">
+                        <input type="text" name="Contact-Name" placeholder="Enter Your Name" required
+                            oninvalid="this.setCustomValidity('Please Enter Your Name')"
+                            oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-box">
+                        <input type="email" name="Contact-Email" placeholder="Enter Your Email" required
+                            oninvalid="this.setCustomValidity('Please Enter Valid Email')"
+                            oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-box">
+                        <input type="number" name="Contact-Num" placeholder="Enter Your Contact Num" required
+                            oninvalid="this.setCustomValidity('Please Enter Valid Mobile Number')"
+                            oninput="this.setCustomValidity('')">
+                    </div>
+                    <div class="input-box message-box">
+                        <textarea name="Contact-Message" required
+                            oninvalid="this.setCustomValidity('Please Enter Your Message')"
+                            oninput="this.setCustomValidity('')"></textarea>
+                    </div>
+                    <div class="button">
+                        <!-- type=button -->
+                        <input type="submit" value="Send">
+                    </div>
+                    <span id=msg></span>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- js link -->
+    <script type="text/javascript" src="Contact.js"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyVP5MG1pFiFbuMUGn1m8GfSzEg29LrA2DeTEveMRyr89AobMwTTR9acuIiEbOR-Ztm/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById('msg')
+
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            alert('Your Message has been sent Successfully!');
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = "Thanks For Contacting Us!"
+                    setTimeout(function () {
+                        msg.innerHTML = ""
+                    }, 5000)
+                    form.reset()
+
+
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+</body>
+
+</html>
